@@ -1,22 +1,24 @@
 import React from 'react';
-// import MapView from 'react-native-maps';
+import MapView from 'react-native-maps';
 
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
-const src = () => <View />
+const App = () => (
+    <View style={{ flex: 1 }}>
+        <MapView 
+            style={{ flex: 1 }}
+            region={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421
+            }}
+            showsUserLocation
+            loadingEnabled
+        />
 
-// const src = () => <View style={{ flex: 1 }}>
-//         <MapView 
-//             style={{ flex: 1 }}
-//             region={{
-//                 latitude: -27.210753,
-//                 longitude: -49.644183,
-//                 latitudeDelta: 0.0143,
-//                 longitudeDelta: 0.0134,
-//             }}
-//             showsUserLocation
-//             loadingEnabled
-//         />
-//     </ View>;
+        <Text>SLAaa</Text>
+    </View>
+);
 
 export default App;
