@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
+import api from '../API';
+// import Search from '../Search';
 
 export default class Map extends Component {
     state = {
-        region: null
+        region: null,
+        errorMessage: null
     };
+    data = null;
+
+    getWildFire = async () => {
+        try {
+            const response = await api.get('/categories/wildfires')
+            const { events } = response.data;
+            console.log(response)
+            this.data = response;
+            console.log('foi');
+        } catch (response) {
+            console.log('erro');
+            this.setState({ errorMessage: response.data.error })
+        }
+    }
 
     async componentDidMount() {
         Geolocation.getCurrentPosition(
@@ -27,6 +44,8 @@ export default class Map extends Component {
                 maximumAge: 1000,
             }
         );
+
+        this.getWildFire();
     }
 
     render() {
@@ -40,6 +59,10 @@ export default class Map extends Component {
                     showsUserLocation
                     loadingEnabled
                 />
+                {/* <Search /> */}
+                <View>
+                    <Text>slasla</Text>
+                </View>
             </View>
         );
     }
